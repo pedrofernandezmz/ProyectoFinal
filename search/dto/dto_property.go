@@ -5,11 +5,11 @@ type PropertyArrayDto struct {
 	Tittle      []string `json:"tittle"`
 	Description []string `json:"description"`
 	Size        []int    `json:"size"`
-	Rooms       []int    `json:"rooms"`
-	Bathrooms   []int    `json:"bathrooms"`
-	Price       []int    `json:"price"`
+	// Rooms       []int    `json:"rooms"`
+	// Bathrooms   []int    `json:"bathrooms"`
+	// Price       []int    `json:"price"`
 	Image       []string `json:"image"`
-	UserId      []int    `json:"userid"`
+	// UserId      []int    `json:"userid"`
 	Street      []string `json:"street"`
 	City        []string `json:"city"`
 }
@@ -19,11 +19,11 @@ type PropertyDto struct {
 	Tittle      string `json:"tittle"`
 	Description string `json:"description"`
 	Size        int    `json:"size"`
-	Rooms       int    `json:"rooms"`
-	Bathrooms   int    `json:"bathrooms"`
-	Price       int    `json:"price"`
+	// Rooms       int    `json:"rooms"`
+	// Bathrooms   int    `json:"bathrooms"`
+	// Price       int    `json:"price"`
 	Image       string `json:"image"`
-	UserId      int    `json:"userid"`
+	// UserId      int    `json:"userid"`
 	Street      string `json:"street"`
 	City        string `json:"city"`
 }
