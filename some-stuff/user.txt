@@ -1,0 +1,5 @@
+use usersdb;
+INSERT INTO users VALUES
+(1,"Matias","Lessio","Wallas","455ca0195da18525b7f69ced381f6333"), //mati123
+(2,"Santiago","Riveros Salomon","Santi","f501a8928398ff5210fd486a248e1a52"), //santi123
+(3,"Joaquin","Vietto","Vietto","7b093b2740d6375b2aa4d00bff550117") //joaco123;

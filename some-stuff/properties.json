@@ -1,0 +1,593 @@
+[{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b0"
+  },
+  "tittle": "CASA BONITA",
+  "description": "hermosa casa, comoda",
+  "street": "Tierra fea",
+  "city": "Potrero de Garay",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 300,
+  "rooms": 2,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 5000,
+  "image": "https://casasdecampo.com.ar/wp-content/uploads/WPL/22/img_casa_frente.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b1"
+  },
+  "tittle": "Departamento Grande en Nueva",
+  "description": "Dpto comodo, ideal para estudiantes o personas jovenes",
+  "street": "Belgrano 295",
+  "city": "Cordoba",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 90,
+  "rooms": 3,
+  "bathrooms": 1,
+  "service": "Venta",
+  "price": 250000,
+  "image": "https://imgar.zonapropcdn.com/avisos/1/00/49/04/77/69/720x532/1793449465.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b2"
+  },
+  "tittle": "Casa en Alta Cordoba",
+  "description": "Casa con espacios amplios y patio para interno",
+  "street": "Sarmiento 1850",
+  "city": "Cordoba",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 215,
+  "rooms": 5,
+  "bathrooms": 2,
+  "service": "Venta",
+  "price": 500000,
+  "image": "https://imgcla.lavoz.com.ar/files/imagecache/ficha_aviso_355_237/avisos/aviso_casa/aviso-casa--13403072.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b3"
+  },
+  "tittle": "Finca - Las 3 Marias",
+  "description": "casa de campo, ideal para disfrutar los fines de semana y en el verano",
+  "street": "S/N",
+  "city": "Unquillo",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 500,
+  "rooms": 10,
+  "bathrooms": 4,
+  "service": "Venta",
+  "price": 850000,
+  "image": "https://http2.mlstatic.com/D_NQ_NP_609084-MLA43057425987_082020-O.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b4"
+  },
+  "tittle": "Cabaña en Gral Belgrano",
+  "description": "Ubicado en un complejo, con cochera y parrilla privada",
+  "street": "San Martín 526 ",
+  "city": "Villa General Belgrano",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 150,
+  "rooms": 3,
+  "bathrooms": 2,
+  "service": "Alquiler",
+  "price": 1500,
+  "image": "https://images.sparairnos.com/property/99/images/180/full/591265ef-bed6-4357-ae8f-41fcf60f1ed9"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b5"
+  },
+  "tittle": "Local Comercial en el Centro",
+  "description": "Local con ubicacion estrategica, cerca del Patio Olmos",
+  "street": "Bv San Juan 258 ",
+  "city": "Cordoba",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 50,
+  "rooms": 1,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 500,
+  "image": "https://imganuncios.mitula.net/medium/vendo_locales_comerciales_juntos_o_separados_oportunidad_urgente_1260014666958309886.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b6"
+  },
+  "tittle": "Departamento cerca de la playa ",
+  "description": "Dpto, ubicado en una de las mejores zonas de Miami",
+  "street": "Sunny Island 18590 ",
+  "city": "Miami",
+  "state": "Florida",
+  "country": "Estados Unidos",
+  "size": 90,
+  "rooms": 2,
+  "bathrooms": 1,
+  "service": "Venta",
+  "price": 120000,
+  "image": "https://media-cdn.tripadvisor.com/media/vr-splice-j/06/7f/85/68.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b7"
+  },
+  "tittle": "Departamento en NYC ",
+  "description": "Dpto, ubicado a metro del Central Park y a pocas cuadras del Time Square",
+  "street": "7th Avenue 2500 ",
+  "city": "Nueva York",
+  "state": "Nueva York",
+  "country": "Estados Unidos",
+  "size": 65,
+  "rooms": 2,
+  "bathrooms": 1,
+  "service": "Venta",
+  "price": 250000,
+  "image": "https://e00-telva.uecdn.es/assets/multimedia/imagenes/2017/10/24/15088391969610.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b8"
+  },
+  "tittle": "Mansion en Atlanta",
+  "description": "Propiedad de lujo y exclusiva en una de la ciudades mas bellas de los Estados Unidos.",
+  "street": "S/N",
+  "city": "Atlanta",
+  "state": "Georgia",
+  "country": "Estados Unidos",
+  "size": 600,
+  "rooms": 16,
+  "bathrooms": 8,
+  "service": "Venta",
+  "price": 1000000,
+  "image": "https://static.abc.es/media/MM/2022/05/16/mariah-carey-1-kG1E--662x433@abc.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99b9"
+  },
+  "tittle": "Departamento en Paris",
+  "description": "Dpto ubicado a pocas cuadras de la Torre Eiffel",
+  "street": "Charles de Gaulle 1580",
+  "city": "Paris",
+  "state": "Paris",
+  "country": "Francia",
+  "size": 75,
+  "rooms": 3,
+  "bathrooms": 1,
+  "service": "Venta",
+  "price": 189000,
+  "image": "http://s03.s3c.es/imag/_v0/640x426/2/6/2/apartamento-paris-4.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99ba"
+  },
+  "tittle": "Departamento en Madrid",
+  "description": "Dpto con una excelente ubicacion cerca de las atracciones mas visitadas",
+  "street": "Calle de Lagasca 528",
+  "city": "Madrid",
+  "state": "Madrid",
+  "country": "España",
+  "size": 90,
+  "rooms": 4,
+  "bathrooms": 2,
+  "service": "Venta",
+  "price": 215000,
+  "image": "https://www.mad4rent.es/uploads/accommodation_type_image/image/15942/gallery_Alquiler_Apartamentos_Madrid_Mad4rent_19.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99bb"
+  },
+  "tittle": "Buckingham Palace",
+  "description": "Palacio de los Monarcas britanicos",
+  "street": "Londres SW1A 1AA",
+  "city": "Londres",
+  "state": "Londres",
+  "country": "Reino Unido",
+  "size": 77000,
+  "rooms": 50,
+  "bathrooms": 35,
+  "service": "Alquiler",
+  "price": 500000,
+  "image": "https://ezgpf7f5ty2.exactdn.com/wp-content/uploads/2008/10/interior-del-palacio.jpg?strip=all&lossy=1&resize=450%2C360&ssl=1"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99bc"
+  },
+  "tittle": "Estancia - Los Algarrobos",
+  "description": "Excelente ubicacion a unos 100 km de CABA, ideal para relajerse y pasar tiempo en familia",
+  "street": "S/N",
+  "city": "San Antonio de Areco​",
+  "state": "Buenos Aires",
+  "country": "Argentina",
+  "size": 10000,
+  "rooms": 25,
+  "bathrooms": 10,
+  "service": "Alquiler",
+  "price": 10000,
+  "image": "https://www.estanciaelombu.com/wp-content/uploads/2020/10/estancia-el-ombu-slide-1.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99bd"
+  },
+  "tittle": "Estancia - Santa Rita",
+  "description": "Excelente ubicacion a unos 75 km de CABA, ideal para relajerse y pasar tiempo en familia",
+  "street": "S/N",
+  "city": "Luján",
+  "state": "Buenos Aires",
+  "country": "Argentina",
+  "size": 9500,
+  "rooms": 20,
+  "bathrooms": 8,
+  "service": "Alquiler",
+  "price": 8500,
+  "image": "https://www.clarin.com/img/2020/01/21/FqLwENjR_360x240__1.jpg"
+},{
+  "_id": {
+    "$oid": "636eb31ee96dfff2f7ab99be"
+  },
+  "tittle": "Campo en Jesus Maria",
+  "description": "Campo, que se puede usar para fines productivos y para descansa alejado de la gran ciudad",
+  "street": "S/N",
+  "city": "Jesus Maria",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 7000,
+  "rooms": 6,
+  "bathrooms": 2,
+  "service": "Venta",
+  "price": 178000,
+  "image": "https://http2.mlstatic.com/D_NQ_NP_995739-MLC49078722822_022022-O.webp"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504668"
+  },
+  "tittle": "Monoambiente en Puerto Madero",
+  "description": "Departamento excelente para fines de semana y para tener un lugar para venir a los conciertos",
+  "street": "San Martin 1580 ",
+  "city": "CABA",
+  "state": "CABA",
+  "country": "Argentina",
+  "size": 63,
+  "rooms": 1,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 4250,
+  "image": "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/OIDUFKXGDNG5HIYNHCTJVYCOSU.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504669"
+  },
+  "tittle": "Piso en Palermo",
+  "description": "Departamento con excelente y a metros de los bosques de Palermo",
+  "street": "9 de Julio 1580 ",
+  "city": "CABA",
+  "state": "CABA",
+  "country": "Argentina",
+  "size": 63,
+  "rooms": 1,
+  "bathrooms": 1,
+  "service": "Venta",
+  "price": 425000,
+  "image": "https://imgar.zonapropcdn.com/avisos/1/00/49/75/41/41/720x532/1826243587.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750466a"
+  },
+  "tittle": "Departamento en Nueva Cordoba",
+  "description": "Dpto comodo, ideal para estudiantes o personas jovenes",
+  "street": "Belgrano 295",
+  "city": "Cordoba",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 84,
+  "rooms": 2,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 2560,
+  "image": "https://imgar.zonapropcdn.com/avisos/1/00/43/39/58/88/720x532/1655969028.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750466b"
+  },
+  "tittle": "Departamento frente a la playa",
+  "description": "Alojamiento con excelentes vistas y ubicacion",
+  "street": "Lula de Silva 1850",
+  "city": "Rio de Janeiro",
+  "state": "Rio de Janeiro",
+  "country": "Brasil",
+  "size": 215,
+  "rooms": 5,
+  "bathrooms": 2,
+  "service": "Venta",
+  "price": 500000,
+  "image": "https://www.perubienesraices.com/wp-content/uploads/2015/04/sala-comedor-330x230.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750466c"
+  },
+  "tittle": "Departamento frente a la playa",
+  "description": "Alojamiento con excelentes vistas y ubicacion",
+  "street": "Pele 1850",
+  "city": "Rio de Janeiro",
+  "state": "Rio de Janeiro",
+  "country": "Brasil",
+  "size": 215,
+  "rooms": 5,
+  "bathrooms": 2,
+  "service": "Alquiler",
+  "price": 5000,
+  "image": "https://http2.mlstatic.com/D_NQ_NP_638701-MLA46715355524_072021-O.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750466d"
+  },
+  "tittle": "Finca - La Nona",
+  "description": "casa de campo, ideal para disfrutar los fines de semana y en el verano",
+  "street": "S/N",
+  "city": "Unquillo",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 450,
+  "rooms": 10,
+  "bathrooms": 4,
+  "service": "Alquiler",
+  "price": 18900,
+  "image": "https://arriendo.com/wp-content/uploads/2021/10/arrendar-una-finca-1400x930.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750466e"
+  },
+  "tittle": "Casa en Gral Belgrano",
+  "description": "Ubicado en un complejo, con cochera y parrilla privada",
+  "street": "San Martín 200 ",
+  "city": "Villa General Belgrano",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 150,
+  "rooms": 3,
+  "bathrooms": 2,
+  "service": "Venta",
+  "price": 150000,
+  "image": "https://static1.sosiva451.com/06741011/b048c450-1655-4d61-87b3-1eb60c32900a_u_small.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750466f"
+  },
+  "tittle": "Local Comercial en el Guemes",
+  "description": "Local con ubicacion estrategica, y cerca de multiples bares",
+  "street": "Belgrano 750 ",
+  "city": "Cordoba",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 50,
+  "rooms": 1,
+  "bathrooms": 1,
+  "service": "Venta",
+  "price": 80000,
+  "image": "https://http2.mlstatic.com/D_NQ_NP_881100-MLA46553825630_062021-W.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504670"
+  },
+  "tittle": "Departamento cerca de la playa ",
+  "description": "Dpto, ubicado en una de las mejores zonas de Miami",
+  "street": "Sunny Island 14500 ",
+  "city": "Miami",
+  "state": "Florida",
+  "country": "Estados Unidos",
+  "size": 75,
+  "rooms": 3,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 1200,
+  "image": "https://cf.bstatic.com/xdata/images/hotel/270x200/267792344.jpg?k=a32f2a2d0046f8418e9df7d4ce8800c4d037a9c9b1dcfb4ef80f2a21c0b16c04&o="
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504671"
+  },
+  "tittle": "Departamento en NYC ",
+  "description": "Dpto, ubicado a metro del Central Park y a pocas cuadras del Time Square",
+  "street": "8th Avenue 1520 ",
+  "city": "Nueva York",
+  "state": "Nueva York",
+  "country": "Estados Unidos",
+  "size": 65,
+  "rooms": 2,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 3000,
+  "image": "http://lh6.ggpht.com/-u1iA9MseYDg/TtzgPALJGGI/AAAAAAAATgI/fO4JWz6jRCM/penthouse-de-lujo-Trump-World-Tower_thumb%25255B2%25255D.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504672"
+  },
+  "tittle": "Departamento en Atlanta",
+  "description": "Ubicado cerca de los monumento mas famosos de la zona",
+  "street": "JF Kennedy 1590",
+  "city": "Atlanta",
+  "state": "Georgia",
+  "country": "Estados Unidos",
+  "size": 62,
+  "rooms": 2,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 850,
+  "image": "https://images.adsttc.com/media/images/5e7b/82e8/b357/6566/5000/03e4/medium_jpg/tribecaloft_andrewfranzarchitect_02.jpg?1585152737"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504673"
+  },
+  "tittle": "Departamento en Paris",
+  "description": "Dpto ubicado a pocas cuadras del Barrio Latino",
+  "street": "Charles de Gaulle 752",
+  "city": "Paris",
+  "state": "Paris",
+  "country": "Francia",
+  "size": 75,
+  "rooms": 3,
+  "bathrooms": 1,
+  "service": "Alquiler",
+  "price": 5290,
+  "image": "https://gestion.pe/resizer/LB5RcDLSnXFyWX6qJ2r15kaRCHs=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/E22TQKUNURCONBKW6T2ZFQVVSM.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504674"
+  },
+  "tittle": "Departamento en Madrid",
+  "description": "Dpto con una excelente ubicacion cerca de las atracciones mas visitadas",
+  "street": "Calle de Lagasca 1580",
+  "city": "Madrid",
+  "state": "Madrid",
+  "country": "España",
+  "size": 90,
+  "rooms": 4,
+  "bathrooms": 2,
+  "service": "Alquiler",
+  "price": 2500,
+  "image": "https://media-cdn.tripadvisor.com/media/vr-splice-j/02/85/a7/f0.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504675"
+  },
+  "tittle": "Casa en Londres",
+  "description": "Casa comodo, con la Fachada de la iconica casa de Sherlock Holmes",
+  "street": "Elizabelth II 1590",
+  "city": "Londres",
+  "state": "Londres",
+  "country": "Reino Unido",
+  "size": 102,
+  "rooms": 5,
+  "bathrooms": 3,
+  "service": "Venta",
+  "price": 500000,
+  "image": "http://2.bp.blogspot.com/-PEBj5gSgY2A/UoqY4TL0GmI/AAAAAAAAKEI/OE7XLvNo3c8/s1600/L1.JPG"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504676"
+  },
+  "tittle": "Estancia - Los Locos",
+  "description": "Excelente ubicacion a unos 100 km de CABA, ideal para relajerse y pasar tiempo en familia",
+  "street": "S/N",
+  "city": "San Antonio de Areco​",
+  "state": "Buenos Aires",
+  "country": "Argentina",
+  "size": 10000,
+  "rooms": 25,
+  "bathrooms": 10,
+  "service": "Venta",
+  "price": 1250000,
+  "image": "https://i0.wp.com/elplanetaurbano.com/wp-content/uploads/2022/05/Estancia-Buenos-Aires-Escapada-El-Ombu-EPU.jpg?resize=1080%2C781&ssl=1"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504677"
+  },
+  "tittle": "Estancia - Santa Elena",
+  "description": "Excelente ubicacion a unos 75 km de CABA, ideal para relajerse y pasar tiempo en familia",
+  "street": "S/N",
+  "city": "Luján",
+  "state": "Buenos Aires",
+  "country": "Argentina",
+  "size": 9500,
+  "rooms": 20,
+  "bathrooms": 8,
+  "service": "Venta",
+  "price": 350000,
+  "image": "https://media-cdn.tripadvisor.com/media/photo-s/1b/6b/fd/a7/estancia-la-sofia.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504678"
+  },
+  "tittle": "Campo en Jesus Maria",
+  "description": "Campo, que se puede usar para fines productivos y para descansa alejado de la gran ciudad",
+  "street": "S/N",
+  "city": "Jesus Maria",
+  "state": "Cordoba",
+  "country": "Argentina",
+  "size": 7000,
+  "rooms": 6,
+  "bathrooms": 2,
+  "service": "Alquiler",
+  "price": 17000,
+  "image": "http://www.disfrutaargentina.com/buenos-aires/guamini/estancia-la-sistina/estancia-la-sistina.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a7504679"
+  },
+  "tittle": "Piso en Barcelona",
+  "description": "Departamento ubicado a metros de la sagrada familia",
+  "street": "Lionel Messi 1582",
+  "city": "Barcelona",
+  "state": "Catalunia",
+  "country": "Espania",
+  "size": 150,
+  "rooms": 6,
+  "bathrooms": 2,
+  "service": "Alquiler",
+  "price": 17000,
+  "image": "https://info.vivendex.com/hubfs/Blog%20Urbaniza/mejor-orientacion-piso-barcelona2.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750467a"
+  },
+  "tittle": "Casa en Barcelona",
+  "description": "Propiedad ubicada en un barrio tranquilo de la ciudad",
+  "street": "America 852",
+  "city": "Barcelona",
+  "state": "Catalunia",
+  "country": "Espania",
+  "size": 104,
+  "rooms": 6,
+  "bathrooms": 2,
+  "service": "Venta",
+  "price": 170000,
+  "image": "https://www.inmofinders.com/blog/wp-content/uploads/2017/01/inmofinders-casa-alto-standing-venta-sarria-barcelona-fachada.jpg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750467b"
+  },
+  "tittle": "Departamento en Milan",
+  "description": "Propiedad ubicada en la capital de la moda, si te gustan las tiendas esta es una oportunidad fantastica",
+  "street": "Verona 852",
+  "city": "Milan",
+  "state": "Milan",
+  "country": "Italia",
+  "size": 104,
+  "rooms": 6,
+  "bathrooms": 2,
+  "service": "Venta",
+  "price": 170000,
+  "image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/piso-barcelona-meritxell-ribe-salon-1605457402.jpg?crop=1.00xw:0.891xh;0,0.0762xh&resize=640:*"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750467c"
+  },
+  "tittle": "Casa en Milan",
+  "description": "Propiedad ideal para familias que recien llegan a la ciudad, ya que esta cerca de los momentos historicos",
+  "street": "Torino 852",
+  "city": "Milan",
+  "state": "Milan",
+  "country": "Italia",
+  "size": 104,
+  "rooms": 6,
+  "bathrooms": 2,
+  "service": "Alquiler",
+  "price": 3580,
+  "image": "https://i.blogs.es/72a85a/1/450_1000.jpeg"
+},{
+  "_id": {
+    "$oid": "637194dc7d9d2a41a750467d"
+  },
+  "tittle": "Edificio, Ex-fabrica",
+  "description": "Si estas buscando un lugar para establecer tu empresa, este es el lugar indicado",
+  "street": "Leandro N. Alem 852",
+  "city": "CABA",
+  "state": "CABA",
+  "country": "Argentina",
+  "size": 800,
+  "rooms": 23,
+  "bathrooms": 10,
+  "service": "Venta",
+  "price": 550000,
+  "image": "https://www.distritooficina.com/wp-content/uploads/2019/05/05_appro-flight-centre-2-17.jpg"
+}]
