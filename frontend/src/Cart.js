@@ -8,7 +8,7 @@ const Cookie = new Cookies();
 console.log(Cookie.get('item'));
 
 async function getUserById(id){
-    return await fetch('http://127.0.0.1:8080/user/' + id, {
+    return await fetch('http://localhost:9000/user/' + id, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -17,28 +17,31 @@ async function getUserById(id){
 
 }
 
-async function getCategories(){
-  return await fetch('http://127.0.0.1:8080/categories', {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(response => response.json())
-}
-
 async function getProducts(){
   var id2 = Cookie.get('item');
-  return await fetch("http://localhost:8983/solr/avisos/select?&defType=lucene&indent=true&q=id:"+id2+"&q.op=OR&rows=100", {
+  return await fetch("http://localhost:8090/properties/"+id2+"/id", {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     }
   }).then(response => response.json())
+  .then(data => [data]);
+}
+
+async function getMessages(){
+  var id2 = Cookie.get('item');
+  return await fetch("http://localhost:8070/properties/"+id2+"/messages", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => response.json())
+  .then(data => [data]);
 }
 
 async function getProductsByCategoryId(id){
   //solo para probar corregir
-  return await fetch("http://localhost:8983/solr/avisos/select?&defType=lucene&indent=true&q=description:%22%27"+id+"%27%22%0Atitle:%22%27"+id+"%27%22&q.op=OR&rows=100", {
+  return await fetch("http://localhost:8000/search/q="+id+"", {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -96,28 +99,77 @@ function addToCart(id, setCartItems){
   return
 }
 
-function showProducts(products, setCartItems){
+function showProducts(products, messages, setCartItems){
   return products.map((product) =>
-    <div class="col s2" align="center">
-      <div class="product large" key={product.id} className="product">
-        <div class="product-image">
-        <img width="300px" height="300px" src={product.image}  onError={(e) => (e.target.onerror = null, e.target.src = "./images/default.jpg")}/>
+    <div class="col s2" onClick={() => { Cookie.set('item', (product.id), { path: '/' }); gotocart();}}>
+
+<div class="product large" key={product.id} className="product">
+        <div class="product-image22">
+        <img class="imagen22" width="650px" height="530px" src={product.image}  onError={(e) => (e.target.onerror = null, e.target.src = "./images/default.jpg")}/>
         </div>
-        <div class="product-image">
-        <img width="300px" height="300px" src={product.image2}  onError={(e) => (e.target.onerror = null, e.target.src = "./images/default.jpg")}/>
+        <div class="product-content22">
+          <span class="text-blue22"><a className="name">{product.tittle}</a></span>
+          <p class="descripcion">{product.description}</p>
+          <p class="precio">USD ${product.price}</p>
+          <table class="tabla">
+            <tr>
+              <td class="negrita">Ciudad:</td>
+              <td>{product.city}</td>
+            </tr>
+            <tr>
+              <td class="negrita">Calle:</td>
+              <td>{product.street}</td>
+            </tr>
+            <tr>
+              <td class="negrita">Superficie Total:</td>
+              <td>{product.size} m²</td>
+            </tr>
+            <tr>
+              <td class="negrita">Habitaciones:</td>
+              <td>{product.rooms}</td>
+            </tr>
+            <tr>
+              <td class="negrita">Baños:</td>
+              <td>{product.bathrooms}</td>
+            </tr>
+          </table>
         </div>
-        <div class="product-content">
-          <span class="text-blue"><a className="name">{product.title}</a></span>
-          <p>Provincia: {product.province}</p>
-          <p>Ciudad: {product.city}</p>
-          <p>Direccion: {product.direction}</p>
-          <p>Descripcion: {product.description}</p>
-          <p>Vendedor: {product.seller}</p>
+        <div class="mapa">
+        <iframe class="mapa2" src={"https://www.google.com/maps/embed/v1/place?key=AIzaSyDy2pYKjByYvXsvfUo_4w5Vq5Khp87nx5U&q="+product.street+","+product.city}></iframe>      
+        </div>
+        <div class="mensajes">
+          <p class="negrita">MENSAJES</p>
+        <form>
+        <div class="form-group">
+          <textarea class="form-control status-box" rows="2" placeholder="Escribe un mensaje..."></textarea>
+        </div>
+      </form>
+      <div class="button-group pull-right">
+        {/* <p class="counter">140</p> */}
+        <a href="#" class="btn btn-primary">ENVIAR</a>
+      </div>
+        </div>
+        <div className="mensajes">
+          <p class="fecha">FECHAFECAH FECAH FECHA</p>
+          <div class="rectangulo">
+          <span class="negrita">User</span>: Mensajeeeeeeeeee
+          </div>
         </div>
       </div>
     </div>
  )
 }
+
+// function showMessages(messages){
+//   return messages.map((message) =>
+//         <div className="mensajes" key={message.id}>
+//           <p class="fecha">{message.date}</p>
+//           <div class="rectangulo">
+//           <span class="negrita">User</span>: {message.body}
+//           </div>
+//         </div>
+//  )
+// }
 
 function logout(){
   Cookie.set("id_user", -1, {path: "/"})
@@ -159,17 +211,18 @@ function gotocompras(){
 }
 
 async function getProductBySearch(query){
-  return fetch("http://localhost:8983/solr/avisos/select?&defType=lucene&indent=true&q=description:%22%27"+query+"%27%22%0Atitle:%22%27"+query+"%27%22&q.op=OR&rows=100", {
+  return fetch("http://localhost:8000/search/q="+query+"", {
     method: "GET",
     header: "Content-Type: application/json"
   }).then(response=>response.json())
 }
 
 
-function Cart() {
+function Home() {
   const [isLogged, setIsLogged] = useState(false)
   const [user, setUser] = useState({})
   const [products, setProducts] = useState([])
+  const [messages, setMessages] = useState([])
   const [cartItems, setCartItems] = useState("")
   const [failedSearch, setFailedSearch] = useState(false)
 
@@ -184,7 +237,11 @@ function Cart() {
   }
 
   if (products.length <= 0){
-    getProducts().then(response => {setProducts(response.response.docs)})
+    getProducts().then(response => {setProducts(response)})
+  }
+
+  if (messages.length <= 0){
+    getMessages().then(response => {setMessages(response)})
   }
 
   if (!cartItems && Cookie.get("cartItems")){
@@ -195,9 +252,9 @@ function Cart() {
 
     await getProductBySearch(query).then(response=>{
       console.log(query)
-      if(response.response.docs != null){
-        if(response.response.docs.length > 0){
-          setProducts(response.response.docs)
+      if(response != null){
+        if(response.length > 0){
+          setProducts(response)
           setFailedSearch(false)
         }else{
           setProducts([])
@@ -216,10 +273,10 @@ function Cart() {
   async function categories(id){
 
     await getProductsByCategoryId(id).then(response=>{
-      console.log(response.response.docs)
-      if(response.response.docs != null){
-        if(response.response.docs.length > 0){
-          setProducts(response.response.docs)
+      console.log(response)
+      if(response != null){
+        if(response.length > 0){
+          setProducts(response)
           setFailedSearch(false)
         }else{
           setProducts([])
@@ -228,7 +285,7 @@ function Cart() {
       }
       else{
         setFailedSearch(false)
-        getProducts().then(response=>setProducts(response.response.docs))
+        getProducts().then(response=>setProducts(response))
       }
     })
 
@@ -252,18 +309,14 @@ function Cart() {
     <div className="home">
       <nav class=" yellow accent-2 ">
         <div class="nav-wrapper">
-            <form class="col s12">
-              <div class="input-field">
-              </div>
-            </form>
           <a href="/" class="brand-logo center blue-text text-darken-2"><img src={logo} width="50px" height="70px" /></a> 
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>{isLogged ? login : <a onClick={gotologin} class="black-text">Iniciar Sesion</a>}</li>
           </ul>
         </div>
       </nav>
-      <div class="row" id="main">
-        {products.length > 0 || failedSearch ? showProducts(products, setCartItems) : <a>NO HAY PRODUCTOS </a>}
+      <div class="row22" id="main">
+        {products.length > 0 || failedSearch ? showProducts(products, messages, setCartItems) : <a>NO HAY PRODUCTOS </a>}
       </div>
 
       <div id="mySidenav" className="sidenav">
@@ -273,4 +326,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export default Home;

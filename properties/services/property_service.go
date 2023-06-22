@@ -48,31 +48,32 @@ func (s *propertyService) GetProperties() (dtos.PropertiesDto, e.ApiError) {
 		if property.Id.Hex() == "000000000000000000000000" {
 			return propertiesDtoArray, e.NewBadRequestApiError("error in insert")
 		}
-		go func(url string) {
-			defer wg.Done()
-			fileName := RandStringBytes() + ".jpg"
-			fmt.Println("Downloading", url, "to", fileName)
+		wg.Done()
+		// go func(url string) {
+		// 	defer wg.Done()
+		// 	fileName := RandStringBytes() + ".jpg"
+		// 	fmt.Println("Downloading", url, "to", fileName)
 
-			output, err := os.Create(fileName)
-			if err != nil {
-				log.Fatal("Error while creating", fileName, "- ", err)
-			}
-			defer output.Close()
+		// 	output, err := os.Create(fileName)
+		// 	if err != nil {
+		// 		log.Fatal("Error while creating", fileName, "- ", err)
+		// 	}
+		// 	defer output.Close()
 
-			res, err := http.Get(url)
-			if err != nil {
-				log.Fatal("http get error: ", err)
-			} else {
-				defer res.Body.Close()
-				_, err = io.Copy(output, res.Body)
-				if err != nil {
-					log.Fatal("Error while downloading", url, "-", err)
+		// 	res, err := http.Get(url)
+		// 	if err != nil {
+		// 		log.Fatal("http get error: ", err)
+		// 	} else {
+		// 		defer res.Body.Close()
+		// 		_, err = io.Copy(output, res.Body)
+		// 		if err != nil {
+		// 			log.Fatal("Error while downloading", url, "-", err)
 
-				} else {
-					fmt.Println("Downloaded", fileName)
-				}
-			}
-		}(property.Image)
+		// 		} else {
+		// 			fmt.Println("Downloaded", fileName)
+		// 		}
+		// 	}
+		// }(property.Image)
 		propertyDto.Tittle = property.Tittle
 		propertyDto.Size = property.Size
 		propertyDto.Description = property.Description
@@ -130,6 +131,10 @@ func (s *propertyService) InsertProperty(propertyDto dtos.PropertyDto) (dtos.Pro
 
 	var property model.Property
 
+	var properties = propertyClient.GetAll()
+	var wg sync.WaitGroup
+	wg.Add(len(properties))
+
 	property.Tittle = propertyDto.Tittle
 	property.Size = propertyDto.Size
 	property.Price = propertyDto.Price
@@ -147,6 +152,31 @@ func (s *propertyService) InsertProperty(propertyDto dtos.PropertyDto) (dtos.Pro
 	if property.Id.Hex() == "000000000000000000000000" {
 		return propertyDto, e.NewBadRequestApiError("error in insert")
 	}
+	go func(url string) {
+		defer wg.Done()
+		fileName := RandStringBytes() + ".jpg"
+		fmt.Println("Downloading", url, "to", fileName)
+
+		output, err := os.Create(fileName)
+		if err != nil {
+			log.Fatal("Error while creating", fileName, "- ", err)
+		}
+		defer output.Close()
+
+		res, err := http.Get(url)
+		if err != nil {
+			log.Fatal("http get error: ", err)
+		} else {
+			defer res.Body.Close()
+			_, err = io.Copy(output, res.Body)
+			if err != nil {
+				log.Fatal("Error while downloading", url, "-", err)
+
+			} else {
+				fmt.Println("Downloaded", fileName)
+			}
+		}
+	}(property.Image)
 	propertyDto.Tittle = property.Tittle
 	propertyDto.Size = property.Size
 	propertyDto.Bathrooms = property.Bathrooms
@@ -175,8 +205,11 @@ func DownloadImage(url string, name string) {
 
 func (s *propertyService) InsertMany(propertiesDto dtos.PropertiesDto) (dtos.PropertiesDto, e.ApiError) {
 	var propertiesDtoArray dtos.PropertiesDto
+	var properties = propertyClient.GetAll()
 	total := len(propertiesDto)
 	processed := make(chan string, total)
+	var wg sync.WaitGroup
+	wg.Add(len(properties))
 
 	for _, propertyDto := range propertiesDto {
 		var property model.Property
@@ -193,13 +226,38 @@ func (s *propertyService) InsertMany(propertiesDto dtos.PropertiesDto) (dtos.Pro
 		property.Street = propertyDto.Street
 
 		property = propertyClient.Insert(property)
-		go DownloadImage(property.Image, property.Image)
+		// go DownloadImage(property.Image, property.Image)
 
 		if property.Id.Hex() == "000000000000000000000000" {
 			processed <- "error"
 			return propertiesDto, e.NewBadRequestApiError("error in insert")
 		}
 		processed <- "complete"
+		go func(url string) {
+			defer wg.Done()
+			fileName := RandStringBytes() + ".jpg"
+			fmt.Println("Downloading", url, "to", fileName)
+
+			output, err := os.Create(fileName)
+			if err != nil {
+				log.Fatal("Error while creating", fileName, "- ", err)
+			}
+			defer output.Close()
+
+			res, err := http.Get(url)
+			if err != nil {
+				log.Fatal("http get error: ", err)
+			} else {
+				defer res.Body.Close()
+				_, err = io.Copy(output, res.Body)
+				if err != nil {
+					log.Fatal("Error while downloading", url, "-", err)
+
+				} else {
+					fmt.Println("Downloaded", fileName)
+				}
+			}
+		}(property.Image)
 		propertyDto.Tittle = property.Tittle
 		propertyDto.Size = property.Size
 		propertyDto.Bathrooms = property.Bathrooms

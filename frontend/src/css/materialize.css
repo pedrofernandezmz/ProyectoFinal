@@ -3486,7 +3486,6 @@ table span.badge {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0 0.75rem;
-  min-height: 1px;
 }
 
 .row .col[class*="push-"], .row .col[class*="pull-"] {
@@ -6631,7 +6630,7 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
 }
 
 .nav-wrapper .input-field input[type=search] {
-  height: inherit;
+  height: 60px;
   padding-left: 4rem;
   width: calc(100% - 4rem);
   border: 0;

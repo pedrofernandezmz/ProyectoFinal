@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 const Cookie = new Cookies();
 
 async function getUserById(id){
-    return await fetch('http://127.0.0.1:8080/user/' + id, {
+    return await fetch('http://localhost:9000/user/' + id, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -16,14 +16,14 @@ async function getUserById(id){
 
 }
 
-async function getCategories(){
-  return await fetch('http://127.0.0.1:8080/categories', {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(response => response.json())
-}
+// async function getCategories(){
+//   return await fetch('http://127.0.0.1:8080/categories', {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json"
+//     }
+//   }).then(response => response.json())
+// }
 
 async function getProducts(){
   return await fetch("http://localhost:8090/properties/all", {
@@ -36,7 +36,7 @@ async function getProducts(){
 
 async function getProductsByCategoryId(id){
   //solo para probar corregir
-  return await fetch("http://localhost:8983/solr/avisos/select?&defType=lucene&indent=true&q=description:%22%27"+id+"%27%22%0Atitle:%22%27"+id+"%27%22&q.op=OR&rows=100", {
+  return await fetch("http://localhost:8000/search/q="+id+"", {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -155,7 +155,7 @@ function gotocompras(){
 }
 
 async function getProductBySearch(query){
-  return fetch("http://localhost:8983/solr/property/select?&defType=lucene&indent=true&q=description:%22%27"+query+"%27%22%0Atittle:%22%27"+query+"%27%22&q.op=OR&rows=100", {
+  return fetch("http://localhost:8000/search/q="+query+"", {
     method: "GET",
     header: "Content-Type: application/json"
   }).then(response=>response.json())
@@ -191,9 +191,9 @@ function Home() {
 
     await getProductBySearch(query).then(response=>{
       console.log(query)
-      if(response.response.docs != null){
-        if(response.response.docs.length > 0){
-          setProducts(response.response.docs)
+      if(response != null){
+        if(response.length > 0){
+          setProducts(response)
           setFailedSearch(false)
         }else{
           setProducts([])
@@ -212,10 +212,10 @@ function Home() {
   async function categories(id){
 
     await getProductsByCategoryId(id).then(response=>{
-      console.log(response.response.docs)
-      if(response.response.docs != null){
-        if(response.response.docs.length > 0){
-          setProducts(response.response.docs)
+      console.log(response)
+      if(response != null){
+        if(response.length > 0){
+          setProducts(response)
           setFailedSearch(false)
         }else{
           setProducts([])
@@ -224,7 +224,7 @@ function Home() {
       }
       else{
         setFailedSearch(false)
-        getProducts().then(response=>setProducts(response.response.docs))
+        getProducts().then(response=>setProducts(response))
       }
     })
 
@@ -264,6 +264,7 @@ function Home() {
         </div>
       </nav>
       <div class="categories">
+      {/* <img src="http://arqui-sw-2-main-back-1:8090//properties/XVlBzgbaiC.jpg" alt="Mi imagen" /> */}
       <button class="botoncats" onClick={() => categories(0)}>
             TODO
           </button>
@@ -273,24 +274,18 @@ function Home() {
           <button class="botoncats" onClick={() => categories("departamento")}>
             DEPARTAMENTOS
           </button>
-          {/* <button class="botoncats" onClick={() => categories(3)}>
-            FERRETERIA
+          <button class="botoncats" onClick={() => categories("terreno")}>
+            TERRENOS
           </button>
-          <button class="botoncats" onClick={() => categories(4)}>
-            FITNESS
+          <button class="botoncats" onClick={() => categories("local")}>
+            LOCALES
           </button>
-          <button class="botoncats" onClick={() => categories(5)}>
-            ROPA
+          <button class="botoncats" onClick={() => categories("oficina")}>
+            OFICINAS
           </button>
-          <button class="botoncats" onClick={() => categories(6)}>
-            JUGUETES
+          <button class="botoncats" onClick={() => categories("campo")}>
+            CAMPOS
           </button>
-          <button class="botoncats" onClick={() => categories(7)}>
-            COMIDA
-          </button>
-          <button class="botoncats" onClick={() => categories(8)}>
-            COMPUTACION
-          </button> */}
           </div>
       <div class="row" id="main">
         {products.length > 0 || failedSearch ? showProducts(products, setCartItems) : <a>NO HAY PRODUCTOS </a>}
