@@ -39,6 +39,7 @@ func (s *messageService) GetMessageById(id string) (dto.MessageDto, e.ApiError) 
 
 	messageDto.PropertyId = message.PropertyId
 	messageDto.UserId = message.UserId
+	messageDto.UserName = message.UserName
 	messageDto.Body = message.Body
 	messageDto.CreatedAt = message.CreatedAt
 	messageDto.Id = message.Id.Hex()
@@ -58,6 +59,7 @@ func (s *messageService) GetMessageByPropertyId(id string) (dto.MessagesDto, e.A
 		}
 		messageDto.PropertyId = message.PropertyId
 		messageDto.UserId = message.UserId
+		messageDto.UserName = message.UserName
 		messageDto.Body = message.Body
 		messageDto.CreatedAt = message.CreatedAt
 		messageDto.Id = message.Id.Hex()
@@ -84,6 +86,7 @@ func (s *messageService) InsertMessage(messageDto dto.MessageDto) (dto.MessageDt
 
 	message.PropertyId = messageDto.PropertyId
 	message.UserId = messageDto.UserId
+	message.UserName = messageDto.UserName
 	message.Body = messageDto.Body
 	message.CreatedAt = time.Now().Format("2006/01/02 15:04:05")
 
@@ -93,6 +96,7 @@ func (s *messageService) InsertMessage(messageDto dto.MessageDto) (dto.MessageDt
 		return messageDto, e.NewBadRequestApiError("error in insert")
 	}
 	messageDto.Body = message.Body
+	messageDto.UserName = message.UserName
 	messageDto.CreatedAt = message.CreatedAt
 	messageDto.PropertyId = message.PropertyId
 	messageDto.UserId = message.UserId

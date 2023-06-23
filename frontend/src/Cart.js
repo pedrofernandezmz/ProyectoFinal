@@ -6,6 +6,10 @@ import Cookies from "universal-cookie";
 
 const Cookie = new Cookies();
 console.log(Cookie.get('item'));
+console.log(Cookie.get("id_user"));
+console.log(Cookie.get('name'));
+console.log(Cookie.get("lastname"));
+console.log(Cookie.get("userproduct"));
 
 async function getUserById(id){
     return await fetch('http://localhost:9000/user/' + id, {
@@ -14,30 +18,71 @@ async function getUserById(id){
       'Content-Type': 'application/json'
     }
 }).then(response => response.json())
+.then(response => {
+  Cookie.set("name", response.name, {path: '/'})
+  Cookie.set("lastname", response.last_name, {path: '/'})
+})
 
 }
 
-async function getProducts(){
+async function getProducts() {
   var id2 = Cookie.get('item');
-  return await fetch("http://localhost:8090/properties/"+id2+"/id", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(response => response.json())
-  .then(data => [data]);
+  try {
+    const response = await fetch(`http://localhost:8090/properties/${id2}/id`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await response.json();
+    Cookie.set("userproduct", data.userid, { path: '/' });
+    return [data];
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
 }
 
 async function getMessages(){
-  var id2 = Cookie.get('item');
-  return await fetch("http://localhost:8070/properties/"+id2+"/messages", {
+  var id3 = Cookie.get('item');
+  return await fetch("http://localhost:8070/properties/"+id3+"/messages", {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     }
   }).then(response => response.json())
-  .then(data => [data]);
 }
+
+function Mensajes(mensaje) {
+  var id4 = Cookie.get('item');
+  var iduser = parseInt(Cookie.get("id_user"), 10);
+  const data = {
+    id: "1",
+    userid: iduser,
+    propertyid: id4,
+    username: ""+Cookie.get('name')+" "+Cookie.get('lastname')+"",
+    body: mensaje,
+    created_at: "05/07/2022"
+  };
+
+  fetch("http://localhost:8070/message", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(responseData => {
+      // Manejar la respuesta del servidor si es necesario
+      console.log(responseData);
+    })
+    .catch(error => {
+      // Manejar errores de la petición
+      console.error(error);
+    });
+  };
+  
 
 async function getProductsByCategoryId(id){
   //solo para probar corregir
@@ -101,7 +146,7 @@ function addToCart(id, setCartItems){
 
 function showProducts(products, messages, setCartItems){
   return products.map((product) =>
-    <div class="col s2" onClick={() => { Cookie.set('item', (product.id), { path: '/' }); gotocart();}}>
+    <div class="col s2" onClick={() => { Cookie.set('item', (product.id), { path: '/' });}}>
 
 <div class="product large" key={product.id} className="product">
         <div class="product-image22">
@@ -141,35 +186,32 @@ function showProducts(products, messages, setCartItems){
           <p class="negrita">MENSAJES</p>
         <form>
         <div class="form-group">
-          <textarea class="form-control status-box" rows="2" placeholder="Escribe un mensaje..."></textarea>
+          <textarea class="form-control status-box" rows="2" placeholder="Escribe un mensaje..." id="mensajess"></textarea>
         </div>
       </form>
       <div class="button-group pull-right">
         {/* <p class="counter">140</p> */}
-        <a href="#" class="btn btn-primary">ENVIAR</a>
+        <a href="#" class="btn btn-primary" onClick={() => { Mensajes(document.getElementById('mensajess').value); window.location.reload(); }}>ENVIAR</a>
       </div>
         </div>
-        <div className="mensajes">
-          <p class="fecha">FECHAFECAH FECAH FECHA</p>
-          <div class="rectangulo">
-          <span class="negrita">User</span>: Mensajeeeeeeeeee
-          </div>
-        </div>
+        {showMessages(messages)}
       </div>
     </div>
  )
 }
 
-// function showMessages(messages){
-//   return messages.map((message) =>
-//         <div className="mensajes" key={message.id}>
-//           <p class="fecha">{message.date}</p>
-//           <div class="rectangulo">
-//           <span class="negrita">User</span>: {message.body}
-//           </div>
-//         </div>
-//  )
-// }
+function showMessages(messages){
+  const valorCookie = parseInt(Cookie.get("id_user"), 10);
+  const valorCookie2 = parseInt(Cookie.get("userproduct"), 10);
+  return messages.map((message) =>
+        <div className="mensajes" key={message.id}>
+          <p class="fecha">{message.created_at}</p>
+          <div className={`rectangulo ${message.userid === valorCookie ? 'azul' : ''} ${message.userid === valorCookie2 ? 'amarillo' : ''}`}>
+          <span className="negrita">{message.username === 'undefined undefined' ? 'Anónimo' : (message.username || 'Anónimo')}</span>: {message.body}
+          </div>
+        </div>
+ )
+}
 
 function logout(){
   Cookie.set("id_user", -1, {path: "/"})
@@ -240,8 +282,19 @@ function Home() {
     getProducts().then(response => {setProducts(response)})
   }
 
-  if (messages.length <= 0){
-    getMessages().then(response => {setMessages(response)})
+  // if (messages.length <= 0){
+  //   getMessages().then(response => {setMessages(response)})
+  // }
+
+  if (messages.length <= 0) {
+    getMessages()
+      .then(response => {
+        if (response.length > 0) {
+          setMessages(response);
+        } else {
+          setMessages([{ username: 'anónimo', text: 'No hay mensajes' }]);
+        }
+      });
   }
 
   if (!cartItems && Cookie.get("cartItems")){
