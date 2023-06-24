@@ -21,6 +21,7 @@ type userServiceInterface interface {
 	GetUsers() (dto.UsersDto, e.ApiError)
 	InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError)
 	Login(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
+	DeleteUser(id int) e.ApiError
 }
 
 var (
@@ -114,4 +115,12 @@ func (s *userService) Login(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
 		return tokenDto, e.NewBadRequestApiError("contraseña incorrecta")
 	}
 
+}
+
+func (s *userService) DeleteUser(id int) e.ApiError {
+	err := userCliente.DeleteUser(id)
+	if err != nil {
+		return e.NewInternalServerApiError("Error deleting user", err)
+	}
+	return nil
 }

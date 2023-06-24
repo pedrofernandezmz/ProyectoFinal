@@ -76,3 +76,18 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusCreated, tokenDto)
 
 }
+
+func DeleteUser(c *gin.Context) {
+	log.Debug("User id to delete: " + c.Param("id"))
+
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	err := service.UserService.DeleteUser(id)
+
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Usuario eliminado correctamente"})
+}

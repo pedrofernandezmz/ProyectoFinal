@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"strconv"
 )
 
 func GetMessageById(c *gin.Context) {
@@ -71,6 +72,23 @@ func DeleteMessage(c *gin.Context) {
 	}
 
 	err = service.MessageService.DeleteMessage(objID)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.Status(http.StatusOK)
+}
+
+func DeleteMessages(c *gin.Context) {
+	userIDStr := c.Param("userid")
+	userID, err := strconv.Atoi(userIDStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "El ID de usuario debe ser un número entero"})
+		return
+	}
+
+	err = service.MessageService.DeleteMessages(userID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

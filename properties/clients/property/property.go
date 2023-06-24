@@ -10,6 +10,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	e "properties/utils/errors"
 )
 
 func GetById(id string) model.Property {
@@ -79,6 +80,25 @@ func GetCity() model.Properties {
 
 	return properties
 }
+
+func DeletePropertys(property model.Property) e.ApiError {
+	db := db.MongoDb
+
+	filter := bson.M{"userid": property.UserId}
+
+	result, err := db.Collection("properties").DeleteMany(context.Background(), filter)
+
+	if err != nil {
+		return e.NewInternalServerApiError("Error deleting messages", err)
+	}
+
+	if result.DeletedCount == 0 {
+		return e.NewNotFoundApiError("Messages not found")
+	}
+
+	return nil
+}
+
 
 // func GetCountry() model.Properties {
 // 	var properties model.Properties

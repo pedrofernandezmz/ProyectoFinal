@@ -46,3 +46,16 @@ func GetUserByUserName(userName string) model.User {
 
 	return user
 }
+
+func DeleteUser(id int) error {
+	var user model.User
+
+	Db.Where("id = ?", id).First(&user)
+
+	err := Db.Delete(&user).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

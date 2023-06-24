@@ -17,6 +17,7 @@ type MessageServiceInterface interface {
 	InsertMessage(messageDto dto.MessageDto) (dto.MessageDto, e.ApiError)
 	GetMessageByPropertyId(id string) (dto.MessagesDto, e.ApiError)
 	DeleteMessage(id primitive.ObjectID) e.ApiError
+	DeleteMessages(userid int) e.ApiError
 }
 
 var (
@@ -74,6 +75,18 @@ func (s *messageService) DeleteMessage(id primitive.ObjectID) e.ApiError {
 	message.Id = id
 
 	err := messageClient.DeleteMessage(message)
+	if err != nil {
+		return e.NewInternalServerApiError("Error deleting message", err)
+	}
+	return nil
+}
+
+func (s *messageService) DeleteMessages(userid int) e.ApiError {
+
+	var message model.Message
+	message.UserId = userid
+
+	err := messageClient.DeleteMessages(message)
 	if err != nil {
 		return e.NewInternalServerApiError("Error deleting message", err)
 	}

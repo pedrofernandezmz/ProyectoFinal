@@ -87,3 +87,21 @@ func DeleteMessage(message model.Message) e.ApiError {
 
 	return nil
 }
+
+func DeleteMessages(message model.Message) e.ApiError {
+	db := db.MongoDb
+
+	filter := bson.M{"userid": message.UserId}
+
+	result, err := db.Collection("messages").DeleteMany(context.Background(), filter)
+
+	if err != nil {
+		return e.NewInternalServerApiError("Error deleting messages", err)
+	}
+
+	if result.DeletedCount == 0 {
+		return e.NewNotFoundApiError("Messages not found")
+	}
+
+	return nil
+}

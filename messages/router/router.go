@@ -30,6 +30,7 @@ func MapUrls() {
 	Gin_router.GET("/properties/:id/messages", messageController.GetMessagesByPropertyId)
 
 	Gin_router.DELETE("/messages/:id", messageController.DeleteMessage)
+	Gin_router.DELETE("/messages2/:userid", messageController.DeleteMessages)
 	Gin_router.POST("/message", messageController.MessageInsert)
 
 	fmt.Println("Finishing mappings configurations")

@@ -7,7 +7,7 @@ import (
 	"properties/dtos"
 	service "properties/services"
 	"properties/utils/cache"
-
+	"strconv"
 	"github.com/gin-gonic/gin"
 )
 
@@ -106,4 +106,21 @@ func Insert(c *gin.Context) {
 
 	fmt.Println("save cache: " + propertyDto.Id)
 	c.JSON(http.StatusCreated, propertyDto)
+}
+
+func DeletePropertys(c *gin.Context) {
+	userIDStr := c.Param("userid")
+	userID, err := strconv.Atoi(userIDStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "El ID de usuario debe ser un número entero"})
+		return
+	}
+
+	err = service.PropertyService.DeletePropertys(userID)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.Status(http.StatusOK)
 }

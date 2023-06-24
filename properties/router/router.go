@@ -3,9 +3,7 @@ package router
 import (
 	"fmt"
 	propertyController "properties/controllers/property"
-
 	"time"
-
 	cors "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -32,6 +30,7 @@ func MapUrls() {
 	Gin_router.GET("/properties/all", propertyController.GetAll)
 	Gin_router.POST("/properties/load", propertyController.Insert)
 	Gin_router.POST("/properties/import", propertyController.InsertMany)
+	Gin_router.DELETE("/propertiesdelete/:userid", propertyController.DeletePropertys)
 
 	fmt.Println("Finishing mappings configurations")
 }
