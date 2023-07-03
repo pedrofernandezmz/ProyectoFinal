@@ -26,6 +26,7 @@ type propertyServiceInterface interface {
 	InsertProperty(propertyDto dtos.PropertyDto) (dtos.PropertyDto, e.ApiError)
 	GetByParam(param string) ([]string, e.ApiError)
 	DeletePropertys(userid int) e.ApiError
+	DeleteProperty(id int) e.ApiError
 }
 
 var (
@@ -319,6 +320,18 @@ func (s *propertyService) DeletePropertys(userid int) e.ApiError {
 	err := propertyClient.DeletePropertys(property)
 	if err != nil {
 		return e.NewInternalServerApiError("Error deleting properties", err)
+	}
+	return nil
+}
+
+func (s *propertyService) DeleteProperty(id int) e.ApiError {
+
+	var property model.Property
+	property.Id = id
+
+	err := propertyClient.DeleteProperty(property)
+	if err != nil {
+		return e.NewInternalServerApiError("Error deleting property", err)
 	}
 	return nil
 }

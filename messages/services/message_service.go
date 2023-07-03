@@ -96,12 +96,15 @@ func (s *messageService) DeleteMessages(userid int) e.ApiError {
 func (s *messageService) InsertMessage(messageDto dto.MessageDto) (dto.MessageDto, e.ApiError) {
 
 	var message model.Message
+	now := time.Now()
+	retraso := time.Duration(-3) * time.Hour
+	horaConRetraso := now.Add(retraso)
 
 	message.PropertyId = messageDto.PropertyId
 	message.UserId = messageDto.UserId
 	message.UserName = messageDto.UserName
 	message.Body = messageDto.Body
-	message.CreatedAt = time.Now().Format("2006/01/02 15:04:05")
+	message.CreatedAt = horaConRetraso.Format("2006/01/02 15:04:05")
 
 	message = messageClient.InsertMessage(message)
 

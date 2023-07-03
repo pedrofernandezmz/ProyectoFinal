@@ -43,3 +43,4 @@ func Add(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{})
 }
+

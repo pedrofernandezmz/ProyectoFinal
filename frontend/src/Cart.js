@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Cart.css";
 import "./css/materialize.css"
+import { ReactComponent as DeleteIcon } from "./images/delete.svg";
 import logo from "./images/home.svg"
 import Cookies from "universal-cookie";
 
@@ -184,6 +185,7 @@ function showProducts(products, messages, setCartItems){
         </div>
         <div class="mensajes">
           <p class="negrita">MENSAJES</p>
+        <div className="formmensaje">
         <form>
         <div class="form-group">
           <textarea class="form-control status-box" rows="2" placeholder="Escribe un mensaje..." id="mensajess"></textarea>
@@ -192,6 +194,7 @@ function showProducts(products, messages, setCartItems){
       <div class="button-group pull-right">
         {/* <p class="counter">140</p> */}
         <a href="#" class="btn btn-primary" onClick={() => { Mensajes(document.getElementById('mensajess').value); window.location.reload(); }}>ENVIAR</a>
+      </div>
       </div>
         </div>
         {showMessages(messages)}
@@ -203,18 +206,47 @@ function showProducts(products, messages, setCartItems){
 function showMessages(messages){
   const valorCookie = parseInt(Cookie.get("id_user"), 10);
   const valorCookie2 = parseInt(Cookie.get("userproduct"), 10);
-  return messages.map((message) =>
-        <div className="mensajes" key={message.id}>
-          <p class="fecha">{message.created_at}</p>
-          <div className={`rectangulo ${message.userid === valorCookie ? 'azul' : ''} ${message.userid === valorCookie2 ? 'amarillo' : ''}`}>
-          <span className="negrita">{message.username === 'undefined undefined' ? 'Anónimo' : (message.username || 'Anónimo')}</span>: {message.body}
-          </div>
+  return messages.map((message) => (
+    <div className="mensajes" key={message.id}>
+      {message.userid === valorCookie && (
+        <div className="delete-icon" onClick={() => eliminarMensaje(message.id)}>
+          <DeleteIcon className="delete-icon-svg" />
         </div>
- )
+      )}
+      <div className="message-content">
+        <p className="fecha">{message.created_at}</p>
+        <div className={`rectangulo ${message.userid === valorCookie ? 'azul' : ''} ${message.userid === valorCookie2 ? 'amarillo' : ''}`}>
+          <span className="negrita">{message.username === 'undefined undefined' ? 'Anónimo' : (message.username || 'Anónimo')}</span>: {message.body}
+        </div>
+      </div>
+    </div>
+  ));
 }
 
 function logout(){
   Cookie.set("id_user", -1, {path: "/"})
+  // Eliminar la cookie "name"
+  Cookie.remove('name');
+  // Eliminar la cookie "lastname"
+  Cookie.remove('lastname');
+  document.location.reload()
+}
+
+function eliminarMensaje(messageid){
+  fetch(`http://localhost:8070/messages/${messageid}`, {
+    method: 'DELETE'
+  })
+    .then(response => {
+      // Manejar la respuesta
+      if (response.ok) {
+        console.log('Mensaje eliminados');
+      } else {
+        console.log('Error al eliminar mensaje');
+      }
+    })
+    .catch(error => {
+      console.log('Error al realizar la solicitud:', error);
+    });
   document.location.reload()
 }
 

@@ -89,46 +89,30 @@ func DeletePropertys(property model.Property) e.ApiError {
 	result, err := db.Collection("properties").DeleteMany(context.Background(), filter)
 
 	if err != nil {
-		return e.NewInternalServerApiError("Error deleting messages", err)
+		return e.NewInternalServerApiError("Error deleting properties", err)
 	}
 
 	if result.DeletedCount == 0 {
-		return e.NewNotFoundApiError("Messages not found")
+		return e.NewNotFoundApiError("Properties not found")
 	}
 
 	return nil
 }
 
+func DeleteProperty(property model.Property) e.ApiError {
+	db := db.MongoDb
 
-// func GetCountry() model.Properties {
-// 	var properties model.Properties
+	filter := bson.M{"id": property.Id}
 
-// 	db := db.MongoDb
+	result, err := db.Collection("properties").DeleteMany(context.Background(), filter)
 
-// 	cursor, err := db.Collection("properties").Find(context.TODO(), bson.D{{}})
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
+	if err != nil {
+		return e.NewInternalServerApiError("Error deleting property", err)
+	}
 
-// 	if err = cursor.All(context.TODO(), &properties); err != nil {
-// 		log.Fatal(err)
-// 	}
+	if result.DeletedCount == 0 {
+		return e.NewNotFoundApiError("Property not found")
+	}
 
-// 	return properties
-// }
-// func GetService() model.Properties {
-// 	var properties model.Properties
-
-// 	db := db.MongoDb
-
-// 	cursor, err := db.Collection("properties").Find(context.TODO(), bson.D{{}})
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-
-// 	if err = cursor.All(context.TODO(), &properties); err != nil {
-// 		log.Fatal(err)
-// 	}
-
-// 	return properties
-// }
+	return nil
+}

@@ -31,6 +31,7 @@ func MapUrls() {
 	Gin_router.POST("/properties/load", propertyController.Insert)
 	Gin_router.POST("/properties/import", propertyController.InsertMany)
 	Gin_router.DELETE("/propertiesdelete/:userid", propertyController.DeletePropertys)
+	Gin_router.DELETE("/propertydelete/:id", propertyController.DeleteProperty)
 
 	fmt.Println("Finishing mappings configurations")
 }

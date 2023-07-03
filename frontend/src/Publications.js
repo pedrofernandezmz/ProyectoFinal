@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Home.css";
+import "./Publications.css";
 import "./css/materialize.css"
 import logo from "./images/home.svg"
 import Cookies from "universal-cookie";
@@ -16,17 +16,9 @@ async function getUserById(id){
 
 }
 
-// async function getCategories(){
-//   return await fetch('http://127.0.0.1:8080/categories', {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//   }).then(response => response.json())
-// }
-
 async function getProducts(){
-  return await fetch("http://localhost:8090/properties/all", {
+  var id = Cookie.get('id_user');
+  return await fetch("http://localhost:8000/search/q="+id+"", {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -53,73 +45,56 @@ function gotologin(){
   goto("/login")
 }
 
-function gotopublications(){
-  goto("/publications")
-}
-
 
 function retry() {
   goto("/")
 }
 
-function addToCart(id, setCartItems){
-  let cookie = Cookie.get("cart");
-
-  if(cookie == undefined){
-    Cookie.set("cart", id + ",1;", {path: "/"});
-    setCartItems(1)
-    return
-  }
-  let newCookie = ""
-  let isNewItem = true
-  let toCompare = cookie.split(";")
-  let total = 0;
-  toCompare.forEach((item) => {
-    if(item != ""){
-      let array = item.split(",")
-      let item_id = array[0]
-      let item_quantity = array[1]
-      if(id == item_id){
-        item_quantity = Number(item_quantity) + 1
-        isNewItem = false
-      }
-      newCookie += item_id + "," + item_quantity + ";"
-      total += Number(item_quantity);
-    }
-  });
-  if(isNewItem){
-    newCookie += id + ",1;"
-    total += 1;
-  }
-  cookie = newCookie
-  Cookie.set("cart", cookie, {path: "/"})
-  Cookie.set("cartItems", total, {path: "/"})
-  setCartItems(total)
-  return
-}
-
-function showProducts(products, setCartItems){
-  return products.map((product) =>
-    <div class="col s2" onClick={() => { Cookie.set('item', (product.id), { path: '/' }); gotocart();}}>
-      <div class="product large" key={product.id} className="product">
-        <div class="product-image">
-        <img width="128px" height="300px" src={product.image}  onError={(e) => (e.target.onerror = null, e.target.src = "./images/default.jpg")}/>
+function showProducts(products) {
+  return products.map((product) => (
+    <div className="row product margenes">
+      <hr />
+      <div obj={product} key={product.id} className="product">
+        <div className="col s4">
+          <img className="imagenn" src={product.image} onError={(e) => (e.target.onerror = null, e.target.src = "./images/default.jpg")} />
         </div>
-        <div class="product-content">
-          <span class="text-blue"><a className="name">{product.tittle}</a></span>
-          <p>| {product.size} m²</p>
-          <p>Ciudad: {product.city}</p>
-          <p>Direccion: {product.street}</p>
+        <div className="col s4">
+          <div className="product-details">
+            <div>
+              <h3 className="text-blue22">{product.tittle}</h3>
+              <h4 className="precio">{product.street}, {product.city}</h4>
+              <h5 className="superficie">Superficie Total: {product.size} m²</h5>
+            </div>
+            <div className="right2">
+              <button className="ver-publicacion" onClick={() => { Cookie.set('item', (product.id), { path: '/' }); gotocart();}}>Ver Publicación</button>
+              <button className="eliminar-publicacion">Eliminar</button>
+            </div>
+          </div>
         </div>
-        {/* <div class="product-action">
-          <a class="waves-effect waves-light btn yellow black-text" onClick={() => addToCart(product.product_id, setCartItems)}>Agregar al carrito</a>
-        </div> */}
       </div>
     </div>
- )
+  ));
 }
 
 function logout(){
+  Cookie.set("id_user", -1, {path: "/"})
+  // Eliminar la cookie "name"
+  Cookie.remove('name');
+  // Eliminar la cookie "lastname"
+  Cookie.remove('lastname');
+  document.location.reload()
+}
+
+function verPublicacion(){
+  Cookie.set("id_user", -1, {path: "/"})
+  // Eliminar la cookie "name"
+  Cookie.remove('name');
+  // Eliminar la cookie "lastname"
+  Cookie.remove('lastname');
+  document.location.reload()
+}
+
+function eliminarPublicacion(){
   Cookie.set("id_user", -1, {path: "/"})
   // Eliminar la cookie "name"
   Cookie.remove('name');
@@ -224,11 +199,6 @@ function search(){
 
 }
 
-function deleteCategory(){
-  Cookie.set("category", 0, {path: "/"})
-  goto("/")
-}
-
 function gotocart(){
   goto("/cart")
 }
@@ -245,7 +215,7 @@ async function getProductBySearch(query){
 }
 
 
-function Home() {
+function Publications() {
   const [isLogged, setIsLogged] = useState(false)
   const [user, setUser] = useState({})
   const [products, setProducts] = useState([])
@@ -344,10 +314,6 @@ function Home() {
   const login = (
     <div>
   <ul id="nav-mobile" className="right hide-on-med-and-down">
-    <li><a onClick={gotocart} className="black-text"><i className="material-icons black-text">shopping_cart</i></a></li>
-    <li><p className="black-text">{cartItems > 0 ? cartItems : 0}</p></li>
-    <li><a onClick={gotopublications} className="black-text">Mis Publicaciones</a></li>
-    {/* <li><a onClick={logout} className="black-text">Cerrar Sesion</a></li> */}
     <li onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
       <a onClick={logout} className="black-text">Cerrar Sesión</a>
       {showDeleteAccount && (
@@ -376,45 +342,12 @@ function Home() {
     <div className="home">
       <nav class=" yellow accent-2 ">
         <div class="nav-wrapper">
-            <form class="col s12">
-              <div class="input-field">
-              <input type="search" id="search" placeholder="Buscar Productos" onKeyDown={(e) => e.keyCode === 13 ? searchQuery(e.target.value) : void(0)} required onChange={search}/>
-              {/* <input type="search" id="search" placeholder="Buscar Productos" onKeyDown={(e) => e.keyCode === 13 ? searchQuery(e.target.value) : void(0)}/>
-                <input id="search" type="search" required onChange={search}/> */}
-                <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
-                <i class="material-icons" onClick={() => categories(0)}>close</i>
-              </div>
-            </form>
           <a href="/" class="brand-logo center blue-text text-darken-2"><img src={logo} width="50px" height="70px" /></a> 
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>{isLogged ? login : <a onClick={gotologin} class="black-text">Iniciar Sesion</a>}</li>
           </ul>
         </div>
       </nav>
-      <div class="categories">
-      {/* <img src="http://arqui-sw-2-main-back-1:8090//properties/XVlBzgbaiC.jpg" alt="Mi imagen" /> */}
-      <button class="botoncats" onClick={() => categories(0)}>
-            TODO
-          </button>
-      <button class="botoncats" onClick={() => categories("casa")}>
-            CASAS
-          </button>
-          <button class="botoncats" onClick={() => categories("departamento")}>
-            DEPARTAMENTOS
-          </button>
-          <button class="botoncats" onClick={() => categories("terreno")}>
-            TERRENOS
-          </button>
-          <button class="botoncats" onClick={() => categories("local")}>
-            LOCALES
-          </button>
-          <button class="botoncats" onClick={() => categories("oficina")}>
-            OFICINAS
-          </button>
-          <button class="botoncats" onClick={() => categories("campo")}>
-            CAMPOS
-          </button>
-          </div>
       <div class="row" id="main">
         {products.length > 0 || failedSearch ? showProducts(products, setCartItems) : <a>NO HAY PRODUCTOS </a>}
       </div>
@@ -426,4 +359,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Publications;

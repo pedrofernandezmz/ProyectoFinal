@@ -9,7 +9,7 @@ type PropertyArrayDto struct {
 	// Bathrooms   []int    `json:"bathrooms"`
 	// Price       []int    `json:"price"`
 	Image       []string `json:"image"`
-	// UserId      []int    `json:"userid"`
+	UserId      []int    `json:"userid"`
 	Street      []string `json:"street"`
 	City        []string `json:"city"`
 }
@@ -23,7 +23,7 @@ type PropertyDto struct {
 	// Bathrooms   int    `json:"bathrooms"`
 	// Price       int    `json:"price"`
 	Image       string `json:"image"`
-	// UserId      int    `json:"userid"`
+	UserId      int    `json:"userid"`
 	Street      string `json:"street"`
 	City        string `json:"city"`
 }

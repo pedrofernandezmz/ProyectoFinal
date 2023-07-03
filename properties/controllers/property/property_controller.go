@@ -124,3 +124,21 @@ func DeletePropertys(c *gin.Context) {
 
 	c.Status(http.StatusOK)
 }
+
+func DeletePropert(c *gin.Context) {
+	id := c.Param("id")
+
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+		return
+	}
+
+	err = service.MessageService.DeleteMessage(objID)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.Status(http.StatusOK)
+}
