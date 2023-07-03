@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./Home"
 import Login from "./Login"
 import Cart from "./Cart"
+import Publish from "./Publish"
 import Publications from "./Publications"
 
 function App(){
@@ -14,6 +15,7 @@ return (
         <Route path= "/login" element={<Login/>}/>
         <Route path= "/cart" element={<Cart/>}/>
         <Route path= "/publications" element={<Publications/>}/>
+        <Route path= "/publish" element={<Publish/>}/>
       </Routes>
     </Router>
   );

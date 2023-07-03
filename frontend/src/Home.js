@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Home.css";
 import "./css/materialize.css"
 import logo from "./images/home.svg"
+import Heart from "./images/heart.svg"
 import Cookies from "universal-cookie";
 
 const Cookie = new Cookies();
@@ -57,6 +58,10 @@ function gotopublications(){
   goto("/publications")
 }
 
+function gotopublish(){
+  goto("/publish")
+}
+
 
 function retry() {
   goto("/")
@@ -102,6 +107,8 @@ function showProducts(products, setCartItems){
   return products.map((product) =>
     <div class="col s2" onClick={() => { Cookie.set('item', (product.id), { path: '/' }); gotocart();}}>
       <div class="product large" key={product.id} className="product">
+      {/* <img src={'http://172.19.0.9:8090/properties/64a2be0926fc8c998265b9b6.jpg'} alt="Imagen" />
+      <img src={`http://172.19.0.9:8090/properties/${product.id}.jpg`} alt="Imagen2" /> */}
         <div class="product-image">
         <img width="128px" height="300px" src={product.image}  onError={(e) => (e.target.onerror = null, e.target.src = "./images/default.jpg")}/>
         </div>
@@ -343,9 +350,10 @@ function Home() {
   const login = (
     <div>
   <ul id="nav-mobile" className="right hide-on-med-and-down">
-    <li><a onClick={gotocart} className="black-text"><i className="material-icons black-text">shopping_cart</i></a></li>
-    <li><p className="black-text">{cartItems > 0 ? cartItems : 0}</p></li>
-    <li><a onClick={gotopublications} className="black-text">Mis Publicaciones</a></li>
+    {/* <li><a onClick={gotocart} className="black-text"><i className="material-icons black-text">shopping_cart</i></a></li>
+    <li><p className="black-text">{cartItems > 0 ? cartItems : 0}</p></li> */}
+    <li className="heart" onClick={gotopublications}><img src={Heart} alt="Heart" width="40" height="40" /></li>
+    <li><a onClick={gotopublish} className="black-text3">Publicar!</a></li>
     {/* <li><a onClick={logout} className="black-text">Cerrar Sesion</a></li> */}
     <li onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
       <a onClick={logout} className="black-text">Cerrar Sesión</a>

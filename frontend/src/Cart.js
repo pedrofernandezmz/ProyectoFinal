@@ -379,9 +379,9 @@ function Home() {
 
   const login = (
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a onClick={gotocart} class="black-text"><i class="material-icons black-text">shopping_cart</i></a></li>
+      {/* <li><a onClick={gotocart} class="black-text"><i class="material-icons black-text">shopping_cart</i></a></li>
       <li><p class="black-text">{cartItems > 0 ? cartItems : 0}</p></li>
-      <li><a onClick={gotocompras} class="black-text">Mis Compras</a></li>
+      <li><a onClick={gotocompras} class="black-text">Mis Compras</a></li> */}
       <li><a onClick={logout} class="black-text">Cerrar Sesion</a></li>
     </ul>
   )

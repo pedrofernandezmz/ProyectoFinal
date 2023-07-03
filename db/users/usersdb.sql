@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Matias','Lessio','Wallas','455ca0195da18525b7f69ced381f6333'),(2,'Santiago','Riveros Salomon','Santi','f501a8928398ff5210fd486a248e1a52'),(3,'Joaquin','Vietto','Vietto','7b093b2740d6375b2aa4d00bff550117');
+INSERT INTO `users` VALUES (1,'Pedro','Fernandez','piter','455ca0195da18525b7f69ced381f6333'),(2,'Felipe','Arenillas','feli','f501a8928398ff5210fd486a248e1a52');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
