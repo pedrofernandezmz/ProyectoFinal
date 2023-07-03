@@ -67,7 +67,7 @@ function showProducts(products) {
             </div>
             <div className="right2">
               <button className="ver-publicacion" onClick={() => { Cookie.set('item', (product.id), { path: '/' }); gotocart();}}>Ver Publicación</button>
-              <button className="eliminar-publicacion">Eliminar</button>
+              <button className="eliminar-publicacion" onClick={() => eliminarPublicacion(product.id)}>Eliminar</button>
             </div>
           </div>
         </div>
@@ -85,21 +85,42 @@ function logout(){
   document.location.reload()
 }
 
-function verPublicacion(){
-  Cookie.set("id_user", -1, {path: "/"})
-  // Eliminar la cookie "name"
-  Cookie.remove('name');
-  // Eliminar la cookie "lastname"
-  Cookie.remove('lastname');
-  document.location.reload()
-}
-
-function eliminarPublicacion(){
-  Cookie.set("id_user", -1, {path: "/"})
-  // Eliminar la cookie "name"
-  Cookie.remove('name');
-  // Eliminar la cookie "lastname"
-  Cookie.remove('lastname');
+function eliminarPublicacion(Id){
+  fetch(`http://localhost:8090/propertydelete/${Id}`, {
+    method: 'DELETE'
+  })
+    .then(response => {
+      // Manejar la respuesta
+      if (response.ok) {
+        console.log('Propiedad eliminada');
+      } else {
+        console.log('Error al eliminar propiedad');
+      }
+    })
+    .catch(error => {
+      console.log('Error al realizar la solicitud:', error);
+    });
+  fetch('http://localhost:8983/solr/property/update?commit=true', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    delete: {
+      query: 'id:'+Id+'',
+    },
+  }),
+})
+  .then(response => {
+    if (response.ok) {
+      console.log('Documentos eliminados correctamente');
+    } else {
+      console.log('Error al eliminar los documentos');
+    }
+  })
+  .catch(error => {
+    console.log('Error de red:', error);
+  });
   document.location.reload()
 }
 

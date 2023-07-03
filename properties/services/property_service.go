@@ -15,6 +15,7 @@ import (
 	"sync"
 
 	log "github.com/sirupsen/logrus"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type propertyService struct{}
@@ -26,7 +27,7 @@ type propertyServiceInterface interface {
 	InsertProperty(propertyDto dtos.PropertyDto) (dtos.PropertyDto, e.ApiError)
 	GetByParam(param string) ([]string, e.ApiError)
 	DeletePropertys(userid int) e.ApiError
-	DeleteProperty(id int) e.ApiError
+	DeleteProperty(id primitive.ObjectID) e.ApiError
 }
 
 var (
@@ -324,7 +325,7 @@ func (s *propertyService) DeletePropertys(userid int) e.ApiError {
 	return nil
 }
 
-func (s *propertyService) DeleteProperty(id int) e.ApiError {
+func (s *propertyService) DeleteProperty(id primitive.ObjectID) e.ApiError {
 
 	var property model.Property
 	property.Id = id

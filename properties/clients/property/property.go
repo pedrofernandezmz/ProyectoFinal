@@ -102,12 +102,12 @@ func DeletePropertys(property model.Property) e.ApiError {
 func DeleteProperty(property model.Property) e.ApiError {
 	db := db.MongoDb
 
-	filter := bson.M{"id": property.Id}
+	filter := bson.M{"_id": property.Id}
 
-	result, err := db.Collection("properties").DeleteMany(context.Background(), filter)
+	result, err := db.Collection("properties").DeleteOne(context.Background(), filter)
 
 	if err != nil {
-		return e.NewInternalServerApiError("Error deleting property", err)
+		return e.NewInternalServerApiError("Error deleting", err)
 	}
 
 	if result.DeletedCount == 0 {

@@ -9,6 +9,7 @@ import (
 	"properties/utils/cache"
 	"strconv"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func Get(c *gin.Context) {
@@ -125,7 +126,7 @@ func DeletePropertys(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
-func DeletePropert(c *gin.Context) {
+func DeleteProperty(c *gin.Context) {
 	id := c.Param("id")
 
 	objID, err := primitive.ObjectIDFromHex(id)
@@ -134,7 +135,7 @@ func DeletePropert(c *gin.Context) {
 		return
 	}
 
-	err = service.MessageService.DeleteMessage(objID)
+	err = service.PropertyService.DeleteProperty(objID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

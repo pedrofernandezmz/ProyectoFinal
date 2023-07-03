@@ -161,28 +161,27 @@ function eliminarcuenta(){
       console.log('Error al realizar la solicitud:', error);
     });
 
-    // const data = {
-    //   "delete": {
-    //     "query": "userid:${userId}"
-    //   }
-    // };
-  
-    // fetch("http://localhost:8983/solr/property/update?commit=true", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(data)
-    // })
-    //   .then(response => response.json())
-    //   .then(responseData => {
-    //     // Manejar la respuesta del servidor si es necesario
-    //     console.log(responseData);
-    //   })
-    //   .catch(error => {
-    //     // Manejar errores de la petición
-    //     console.error(error);
-    //   });
+    fetch('http://localhost:8983/solr/property/update?commit=true', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        delete: {
+          query: 'userid:'+userId+'',
+        },
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Documentos eliminados correctamente');
+        } else {
+          console.log('Error al eliminar los documentos');
+        }
+      })
+      .catch(error => {
+        console.log('Error de red:', error);
+      });
 
   // Borrar cuenta
   fetch(`http://localhost:9000/userdelete/${userId}`, {
