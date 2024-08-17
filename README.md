@@ -1,7 +1,11 @@
 # Arq-Software2
 
 
-Desarrollaremos un sistema de publicación de clasificados, mediante el cual las empresas inmobiliarias puedan cargar sus bases de datos con el posteo de un archivo json de la información relacionada a los inmuebles.
+Desarrollamos un sistema de publicación de clasificados, mediante el cual las empresas inmobiliarias puedan cargar sus bases de datos con el posteo de un archivo json de la información relacionada a los inmuebles.
+<img width="1440" alt="Captura de Pantalla 2022-11-13 a la(s) 20 11 24" src="https://github.com/user-attachments/assets/12821c61-4e82-4a59-976d-9a3c6ffcd77a">
+<img width="1263" alt="Captura de pantalla 2023-06-21 a la(s) 00 33 29" src="https://github.com/user-attachments/assets/d23d1add-50d6-458b-9cfb-bae604fbd881">
+
+
 Los navegantes pueden buscar esos clasificados desde la home del sitio en base a una oración y traiga los resultados priorizados que permitan ver el detalle de la publicación.
 Para esto, se piden desarrollar 3 microservicios:
 1. búsqueda
